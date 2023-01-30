@@ -149,40 +149,6 @@ class UserController {
 			})
 		}
 	}
-
-	updateInvitedTable = async (req, res) => {
-		const isInvited = req.params.isInvited
-		try {
-			let user
-			if (isInvited === 'true') {
-				user = await User.findByIdAndUpdate(
-					req.params.userId,
-					{
-						$addToSet: { invitedTables: req.params.tableId },
-					},
-					{ new: true }
-				)
-			} else {
-				user = await User.findByIdAndUpdate(
-					req.params.userId,
-					{
-						$pull: { invitedTables: req.params.tableId },
-					},
-					{ new: true }
-				)
-			}
-			res.status(200).json({
-				success: true,
-				message: 'update table of user successfully',
-				user,
-			})
-		} catch (error) {
-			res.status(500).json({
-				success: false,
-				message: 'internal server!',
-			})
-		}
-	}
 }
 
 module.exports = new UserController()

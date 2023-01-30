@@ -98,7 +98,7 @@ class AuthController {
 			res.status(200).json({
 				success: true,
 				message: 'Register account success!!!, please verify email!',
-				accessToken,
+				user: newUser,
 			})
 		} catch (error) {
 			res.status(500).json({
